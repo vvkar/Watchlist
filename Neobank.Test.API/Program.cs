@@ -1,9 +1,24 @@
+using Neobank.Test.API.Filters;
+using Neobank.Test.API.Models.Options;
+using Neobank.Test.Infrastructure.Business;
+using Neobank.Test.Infrastructure.Persistance;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDataContext(builder.Configuration);
+builder.Services.AddApplications(builder.Configuration);
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+//UNDONE: consider using options
+builder.Services.Configure<FilmSearchServiceOptions>(FilmSearchServiceOptions.IMDB,
+    builder.Configuration.GetSection($"{FilmSearchServiceOptions.Section}:{FilmSearchServiceOptions.IMDB}"));
+
+builder.Services.AddControllers(opts =>
+    {
+        opts.Filters.Add<ResponseFilter>();
+        opts.Filters.Add<ExceptionFilter>();
+    });
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
