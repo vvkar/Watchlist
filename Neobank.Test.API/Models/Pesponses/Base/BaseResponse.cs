@@ -2,17 +2,12 @@
 {
     public abstract record BaseResponse
     {
-        public BaseResponse()
-        {
-
-        }
-
         public BaseResponse(object body)
         {
             Body = body;
         }
 
         public bool IsSuccess { get; init; }
-        public object Body { get; init; }
+        public object? Body { get; init; }
     }
 }

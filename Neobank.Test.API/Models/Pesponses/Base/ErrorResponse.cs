@@ -2,12 +2,7 @@
 {
     public record ErrorResponse : BaseResponse
     {
-        public ErrorResponse(object body) : base(body)
-        {
-            IsSuccess = false;
-        }
-
-        public ErrorResponse()
+        public ErrorResponse(object body = null) : base(body)
         {
             IsSuccess = false;
         }

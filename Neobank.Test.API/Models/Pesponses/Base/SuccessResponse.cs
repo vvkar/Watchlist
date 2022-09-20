@@ -2,11 +2,7 @@
 {
     public record SuccessResponse: BaseResponse
     {
-        public SuccessResponse(object body) : base(body)
-        {
-            IsSuccess = true;
-        }
-        public SuccessResponse()
+        public SuccessResponse(object body = null) : base(body)
         {
             IsSuccess = true;
         }
