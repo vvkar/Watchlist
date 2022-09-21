@@ -5,6 +5,6 @@
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
 
-        public IEnumerable<FilmModel> Films { get; set; }
+        public IEnumerable<WatchlistItemModel> Films { get; set; }
     }
 }

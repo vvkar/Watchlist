@@ -4,15 +4,14 @@ using System.Reflection;
 
 namespace Neobank.Test.Infrastructure.Persistance
 {
-    public class AppContext : DbContext
+    public class AppDbContext : DbContext
     {
-        public AppContext(DbContextOptions<AppContext> options)
+        public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
-
         }
 
-        public DbSet<FilmEntity> Films { get; set; }
+        public DbSet<WatchlistItemEntity> Films { get; set; }
         public DbSet<WatchlistEntity> Watchlists { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)

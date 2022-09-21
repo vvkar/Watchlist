@@ -22,7 +22,7 @@ namespace Neobank.Test.Infrastructure.Business.CQRS.Queries
         }
         public async Task<IEnumerable<FilmDto>> Handle(GetFilmQuery request, CancellationToken cancellationToken)
         {
-            var result = await _filmSearchService.GetFilmByNameAsync(request.Title);
+            var result = await _filmSearchService.GetFilmByTitleAsync(request.Title);
 
             if (!result.Any())
                 throw new Exception("no content");

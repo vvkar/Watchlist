@@ -1,6 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Neobank.Test.Domain.Core.DTO;
+using Neobank.Test.Domain.Core.Exceptions;
 using Neobank.Test.Domain.Interfaces.Services;
+using Neobank.Test.Infrastructure.Business.Options;
 using Newtonsoft.Json;
 using System.Net;
 
@@ -8,27 +11,34 @@ namespace Neobank.Test.Infrastructure.Business.Services
 {
     public class ImdbSearchService : IFilmSearchService
     {
-        private readonly HttpClient _httpClient;
-        private readonly IConfiguration _configuration;
+        private readonly IHttpClientFactory _clientFactory;
+        private readonly FilmSearchServiceOptions _options;
 
-        public ImdbSearchService(HttpClient httpClient, IConfiguration configuration)
+        public ImdbSearchService(IHttpClientFactory clientFactory, IOptionsSnapshot<FilmSearchServiceOptions> namedOptions)
         {
-            _httpClient = httpClient;
-            _configuration = configuration;
+            _clientFactory = clientFactory;
+            _options = namedOptions.Get(FilmSearchServiceOptions.IMDB);
         }
 
-        public async Task<IEnumerable<FilmDto>> GetFilmByNameAsync(string name)
+        public async Task<IEnumerable<FilmDto>> GetFilmByTitleAsync(string title)
         {
-            var apiKey = _configuration["FilmSearchServices:IMDB:ApiKey"];    
+            var client = _clientFactory.CreateClient();
+            var baseUri = _options.BaseUri;
+            var apiKey = _options.ApiKey;    
 
-            var response = await _httpClient.GetAsync($"Search/{apiKey}/{name}");
+            var response = await client.GetAsync($"{baseUri}Search/{apiKey}/{title}");
 
             if (response.StatusCode != HttpStatusCode.OK)
-                throw new Exception();
+                throw new BadRequestException("Something went wrong.");
 
             var content = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<FilmDtoHttpResponse>(content);
 
-            var result = JsonConvert.DeserializeObject<FilmDtoAggregate>(content);
+            if (!string.IsNullOrEmpty(result!.ErrorMessage))
+                throw new BadRequestException(result.ErrorMessage);
+
+            if (!result.Results.Any())
+                throw new NotFoundException($"Haven't found anything with search parameter: {result.Expression}");
 
             return result.Results;
         }

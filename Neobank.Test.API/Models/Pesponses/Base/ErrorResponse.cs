@@ -1,10 +1,11 @@
 ﻿namespace Neobank.Test.API.Models.Pesponses.Base
 {
-    public record ErrorResponse : BaseResponse
+    public record ErrorResponse<T> : BaseResponse<T>
     {
-        public ErrorResponse(object body = null) : base(body)
+        public ErrorResponse()
         {
             IsSuccess = false;
         }
+        public string Message { get; init; }
     }
 }

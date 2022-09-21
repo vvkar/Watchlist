@@ -1,8 +1,8 @@
 ﻿namespace Neobank.Test.API.Models.Pesponses.Base
 {
-    public record SuccessResponse: BaseResponse
+    public record SuccessResponse<T>: BaseResponse <T>
     {
-        public SuccessResponse(object body = null) : base(body)
+        public SuccessResponse()
         {
             IsSuccess = true;
         }

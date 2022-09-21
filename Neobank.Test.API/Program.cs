@@ -1,5 +1,7 @@
+using FluentValidation.AspNetCore;
+using Neobank.Test.API.Configurations;
+using Neobank.Test.API.DI;
 using Neobank.Test.API.Filters;
-using Neobank.Test.API.Models.Options;
 using Neobank.Test.Infrastructure.Business;
 using Neobank.Test.Infrastructure.Persistance;
 
@@ -9,18 +11,31 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDataContext(builder.Configuration);
 builder.Services.AddApplications(builder.Configuration);
 
-//UNDONE: consider using options
-builder.Services.Configure<FilmSearchServiceOptions>(FilmSearchServiceOptions.IMDB,
-    builder.Configuration.GetSection($"{FilmSearchServiceOptions.Section}:{FilmSearchServiceOptions.IMDB}"));
+builder.Services.AddFluentValidationAutoValidation()
+    .AddFluentValidationClientsideAdapters();
 
-builder.Services.AddControllers(opts =>
+builder.Services.AddValidators();
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddHttpClient();
+
+builder.Services.ConfigureCustomOptions(builder.Configuration);
+
+builder.Services.ConfigureSwagger(builder.Configuration);
+
+builder.Services
+    .AddControllers(opts =>
     {
         opts.Filters.Add<ResponseFilter>();
         opts.Filters.Add<ExceptionFilter>();
-    });
+        opts.Filters.Add<ValidationFilter>();
+    })
+    .ConfigureApiBehaviorOptions(opts =>
+        opts.SuppressModelStateInvalidFilter = true);
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 

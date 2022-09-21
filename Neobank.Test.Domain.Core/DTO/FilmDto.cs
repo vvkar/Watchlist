@@ -1,10 +1,10 @@
 ﻿namespace Neobank.Test.Domain.Core.DTO
 {
-    public class FilmDto
+    public record FilmDto
     {
-        public string Id { get; set; }
-        public string Title { get; set; }
-        public string ResultType { get; set; }
-        public string Description { get; set; }
+        public string Id { get; init; }
+        public string Title { get; init; }
+        public string ResultType { get; init; }
+        public string Description { get; init; }
     }
 }

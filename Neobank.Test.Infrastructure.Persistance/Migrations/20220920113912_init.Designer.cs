@@ -11,7 +11,7 @@ using Neobank.Test.Infrastructure.Persistance;
 
 namespace Neobank.Test.Infrastructure.Persistance.Migrations
 {
-    [DbContext(typeof(AppContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20220920113912_init")]
     partial class init
     {

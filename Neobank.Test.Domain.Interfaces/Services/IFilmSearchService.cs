@@ -4,6 +4,6 @@ namespace Neobank.Test.Domain.Interfaces.Services
 {
     public interface IFilmSearchService
     {
-        Task<IEnumerable<FilmDto>> GetFilmByNameAsync(string name);
+        Task<IEnumerable<FilmDto>> GetFilmByTitleAsync(string name);
     }
 }

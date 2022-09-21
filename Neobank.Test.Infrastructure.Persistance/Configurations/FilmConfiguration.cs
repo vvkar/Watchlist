@@ -4,9 +4,9 @@ using Neobank.Test.Infrastructure.Persistance.Entities;
 
 namespace Neobank.Test.Infrastructure.Persistance.Configurations
 {
-    public class FilmConfiguration : IEntityTypeConfiguration<FilmEntity>
+    public class FilmConfiguration : IEntityTypeConfiguration<WatchlistItemEntity>
     {
-        public void Configure(EntityTypeBuilder<FilmEntity> builder)
+        public void Configure(EntityTypeBuilder<WatchlistItemEntity> builder)
         {
             builder.HasKey(f => new {f.Id, f.WatchlistId});
 

@@ -10,7 +10,7 @@ namespace Neobank.Test.Infrastructure.Persistance
         public static void AddDataContext(this IServiceCollection  services, IConfiguration config)
         {
             var connectionString = config.GetConnectionString("DefaultConnection");
-            services.AddDbContext<AppContext>(options =>
+            services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(connectionString, 
                     opts => opts.MigrationsAssembly(Assembly.GetExecutingAssembly().GetName().Name)));
         }

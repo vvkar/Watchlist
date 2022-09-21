@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Neobank.Test.Domain.Core\Neobank.Test.Domain.Core.csproj" />
   </ItemGroup>
 

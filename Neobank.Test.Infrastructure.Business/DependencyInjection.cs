@@ -14,11 +14,6 @@ namespace Neobank.Test.Infrastructure.Business
             services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IFilmSearchService, ImdbSearchService>();
-
-            services.AddHttpClient<IFilmSearchService, ImdbSearchService>(opt =>
-                {
-                    opt.BaseAddress = new Uri(configuration["FilmSearchServices:IMDB:BaseURI"]);
-                });
         }
     }
 }
