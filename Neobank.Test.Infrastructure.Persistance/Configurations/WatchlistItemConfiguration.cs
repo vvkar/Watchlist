@@ -4,14 +4,11 @@ using Neobank.Test.Infrastructure.Persistance.Entities;
 
 namespace Neobank.Test.Infrastructure.Persistance.Configurations
 {
-    public class FilmConfiguration : IEntityTypeConfiguration<WatchlistItemEntity>
+    public class WatchlistItemConfiguration : IEntityTypeConfiguration<WatchlistItemEntity>
     {
         public void Configure(EntityTypeBuilder<WatchlistItemEntity> builder)
         {
-            builder.HasKey(f => new {f.Id, f.WatchlistId});
-
-            builder.HasOne(f => f.Watchlist)
-                .WithMany(wl => wl.Films);
+            builder.HasKey(f => new {f.Id, f.UserId});
 
             builder.Property(f => f.IsWatched)
                 .IsRequired()

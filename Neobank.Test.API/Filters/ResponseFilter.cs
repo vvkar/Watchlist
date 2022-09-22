@@ -13,7 +13,6 @@ namespace Neobank.Test.API.Filters
                 {
                     Body = result.Value
                 });
-            
             else if (context.Result is OkResult)
                 context.Result = new OkObjectResult(new SuccessResponse<object>());
         }

@@ -1,4 +1,4 @@
-﻿namespace Neobank.Test.Infrastructure.Business.Options
+﻿namespace Neobank.Test.Domain.Core.Options
 {
     public class FilmSearchServiceOptions
     {

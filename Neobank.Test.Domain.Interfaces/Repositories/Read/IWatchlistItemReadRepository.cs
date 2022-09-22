@@ -4,6 +4,8 @@ namespace Neobank.Test.Domain.Interfaces.Repositories.Read
 {
     public interface IWatchlistItemReadRepository
     {
-        Task<WatchlistItemModel> GetAsync(Guid watchlistId, string itemId);
+        Task<IEnumerable<WatchlistItemModel>> GetAllAsync();
+        Task<IEnumerable<WatchlistItemModel>> GetByUserId(Guid userId);
+        Task<WatchlistItemModel> GetAsync(Guid userId, string itemId);
     }
 }

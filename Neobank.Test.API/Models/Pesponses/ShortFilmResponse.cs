@@ -1,6 +1,6 @@
-﻿namespace Neobank.Test.Domain.Core.DTO
+﻿namespace Neobank.Test.API.Models.Pesponses
 {
-    public record FilmDto
+    public record ShortFilmResponse
     {
         public string Id { get; init; }
         public string Title { get; init; }

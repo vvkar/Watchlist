@@ -11,8 +11,7 @@ namespace Neobank.Test.Infrastructure.Persistance
         {
         }
 
-        public DbSet<WatchlistItemEntity> Films { get; set; }
-        public DbSet<WatchlistEntity> Watchlists { get; set; }
+        public DbSet<WatchlistItemEntity> WatchlistItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -8,9 +8,8 @@ namespace Neobank.Test.API.Validation.Validators
     {
         public AddToWatchlistRequestValidator()
         {
-            RuleFor(r => r.UserId).NotEmpty().WithMessage("UserId should not be empty");
-            RuleFor(r => r.FilmId).NotNull().Matches(new Regex(@"tt\d{7}"))
-                .WithMessage("FilmId should match pattern: tt1234567");
+            RuleFor(r => r.UserId).UserId();
+            RuleFor(r => r.FilmId).FilmId();
         }
     }
 }

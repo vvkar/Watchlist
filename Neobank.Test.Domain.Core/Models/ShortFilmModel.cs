@@ -1,10 +1,10 @@
-﻿namespace Neobank.Test.API.Models.Pesponses
+﻿namespace Neobank.Test.Domain.Core.Models
 {
-    public record FilmResponse
+    public class ShortFilmModel
     {
         public string Id { get; init; }
         public string Title { get; init; }
         public string ResultType { get; init; }
-        public string Description { get; init; }
+        public string? Description { get; init; }
     }
 }

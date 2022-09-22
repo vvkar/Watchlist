@@ -7,7 +7,7 @@ namespace Neobank.Test.API.Validation.Validators
     {
         public GetFilmsRequestValidator()
         {
-            RuleFor(r => r.Title).MaximumLength(20).NotEmpty();
+            RuleFor(r => r.Title).MaximumLength(50).NotEmpty();
         }
     }
 }

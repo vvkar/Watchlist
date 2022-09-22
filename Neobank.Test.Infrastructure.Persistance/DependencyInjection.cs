@@ -1,6 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Neobank.Test.Domain.Interfaces.Repositories.Read;
+using Neobank.Test.Domain.Interfaces.Repositories.Write;
+using Neobank.Test.Infrastructure.Persistance.Repositories.Read;
+using Neobank.Test.Infrastructure.Persistance.Repositories.Write;
 using System.Reflection;
 
 namespace Neobank.Test.Infrastructure.Persistance
@@ -13,6 +17,12 @@ namespace Neobank.Test.Infrastructure.Persistance
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(connectionString, 
                     opts => opts.MigrationsAssembly(Assembly.GetExecutingAssembly().GetName().Name)));
+        }
+
+        public static void AddRepositories(this IServiceCollection services)
+        {
+            services.AddScoped<IWatchlistItemReadRepository, WatchlistItemReadRepository>();
+            services.AddScoped<IWatchlistItemWriteRepository, WatchlistItemWriteRepository>();
         }
     }
 }

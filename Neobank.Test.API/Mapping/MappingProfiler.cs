@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Neobank.Test.API.Models.Pesponses;
-using Neobank.Test.Domain.Core.DTO;
+using Neobank.Test.Domain.Core.Models;
 
 namespace Neobank.Test.API.Mapping
 {
@@ -8,7 +8,8 @@ namespace Neobank.Test.API.Mapping
     {
         public MappingProfiler()
         {
-            CreateMap<FilmDto, FilmResponse>();
+            CreateMap<ShortFilmModel, ShortFilmResponse>();
+            CreateMap<WatchlistItemModel, WatchlistItemResponse>();
         }
     }
 }

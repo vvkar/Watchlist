@@ -1,4 +1,4 @@
-﻿using Neobank.Test.Infrastructure.Business.Options;
+﻿using Neobank.Test.Domain.Core.Options;
 
 namespace Neobank.Test.API.Configurations
 {

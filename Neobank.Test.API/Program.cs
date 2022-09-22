@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDataContext(builder.Configuration);
 builder.Services.AddApplications(builder.Configuration);
+builder.Services.AddRepositories();
 
 builder.Services.AddFluentValidationAutoValidation()
     .AddFluentValidationClientsideAdapters();

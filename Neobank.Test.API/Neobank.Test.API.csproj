@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Options\**" />
+    <Content Remove="Models\Options\**" />
+    <EmbeddedResource Remove="Models\Options\**" />
+    <None Remove="Models\Options\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="FluentValidation" Version="11.2.2" />
@@ -25,10 +32,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Neobank.Test.Infrastructure.Business\Neobank.Test.Infrastructure.Business.csproj" />
     <ProjectReference Include="..\Neobank.Test.Infrastructure.Persistance\Neobank.Test.Infrastructure.Persistance.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\Options\" />
   </ItemGroup>
 
 </Project>

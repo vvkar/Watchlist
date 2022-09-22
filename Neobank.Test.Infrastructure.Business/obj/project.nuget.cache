@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "prhOBia3PajhFgCCBa72MZ9wOZigSKYRG5JXsyb9w3YMjbAIV6ic6KIK7v7XK/BkJlYYcHDCQgMd61S2Cv1Tvg==",
+  "dgSpecHash": "Hq9PduWjYAuPFi3S1pbcDvW4nkT7HTgRm/6Sk8NTwrA7f+80D5PjYxCZXHI67UKhMQpiJRJReR8Z9L3rwTBN/g==",
   "success": true,
   "projectFilePath": "D:\\STUDY\\Neobank\\Neobank.Test\\Neobank.Test.Infrastructure.Business\\Neobank.Test.Infrastructure.Business.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\user\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\mediatr\\10.0.1\\mediatr.10.0.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\10.0.1\\mediatr.extensions.microsoft.dependencyinjection.10.0.1.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\6.0.0\\microsoft.extensions.dependencyinjection.6.0.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",

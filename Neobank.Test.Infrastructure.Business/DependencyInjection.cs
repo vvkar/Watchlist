@@ -3,7 +3,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Neobank.Test.Domain.Interfaces.Services;
 using Neobank.Test.Infrastructure.Business.Services;
-using System.Reflection;
 
 namespace Neobank.Test.Infrastructure.Business
 {
@@ -14,6 +13,9 @@ namespace Neobank.Test.Infrastructure.Business
             services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IFilmSearchService, ImdbSearchService>();
+
+            //UNDONE: consider factory
+            services.AddHttpClient<IFilmSearchService, ImdbSearchService>();
         }
     }
 }
