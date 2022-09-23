@@ -30,8 +30,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Neobank.Test.Infrastructure.Business\Watchlist.Infrastructure.Business.csproj" />
-    <ProjectReference Include="..\Neobank.Test.Infrastructure.Persistance\Watchlist.Infrastructure.Persistance.csproj" />
+    <ProjectReference Include="..\Watchlist.Infrastructure.Business\Watchlist.Infrastructure.Business.csproj" />
+    <ProjectReference Include="..\Watchlist.Infrastructure.Persistance\Watchlist.Infrastructure.Persistance.csproj" />
   </ItemGroup>
 
 </Project>

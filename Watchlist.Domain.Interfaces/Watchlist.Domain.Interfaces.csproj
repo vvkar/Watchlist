@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Neobank.Test.Domain.Core\Watchlist.Domain.Core.csproj" />
+    <ProjectReference Include="..\Watchlist.Domain.Core\Watchlist.Domain.Core.csproj" />
   </ItemGroup>
 
 </Project>

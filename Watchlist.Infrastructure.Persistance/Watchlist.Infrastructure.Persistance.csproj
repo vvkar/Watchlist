@@ -22,8 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Neobank.Test.Domain.Core\Watchlist.Domain.Core.csproj" />
-    <ProjectReference Include="..\Neobank.Test.Domain.Interfaces\Watchlist.Domain.Interfaces.csproj" />
+    <ProjectReference Include="..\Watchlist.Domain.Core\Watchlist.Domain.Core.csproj" />
+    <ProjectReference Include="..\Watchlist.Domain.Interfaces\Watchlist.Domain.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>
