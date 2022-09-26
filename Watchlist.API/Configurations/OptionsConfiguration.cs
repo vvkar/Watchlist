@@ -8,6 +8,9 @@ namespace Neobank.Test.API.Configurations
         {
             services.Configure<FilmSearchServiceOptions>(FilmSearchServiceOptions.IMDB,
                  configuration.GetSection($"{FilmSearchServiceOptions.Section}:{FilmSearchServiceOptions.IMDB}"));
+
+            services.Configure<SmtpOptions>(configuration.GetSection($"{SmtpOptions.SMTP}"));
+            services.Configure<PromotionOptions>(configuration.GetSection($"{PromotionOptions.Promotion}"));
         }
     }
 }

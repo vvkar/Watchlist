@@ -1,8 +1,7 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using Watchlist.Domain.Core.Exceptions;
 using Watchlist.Domain.Core.Models;
-using Watchlist.Domain.Interfaces.Repositories.Read;
+using Watchlist.Domain.Interfaces.Repositories;
 
 namespace Watchlist.Infrastructure.Business.CQRS.Queries
 {
@@ -18,18 +17,16 @@ namespace Watchlist.Infrastructure.Business.CQRS.Queries
     public class GetWatchlistQueryHandler
         : IRequestHandler<GetWatchlistQuery, IEnumerable<WatchlistItemModel>>
     {
-        private readonly IWatchlistItemReadRepository _readRepo;
-        private readonly IMapper _mapper;
+        private readonly IWatchlistItemRepository _repo;
 
-        public GetWatchlistQueryHandler(IWatchlistItemReadRepository readRepo, IMapper mapper)
+        public GetWatchlistQueryHandler(IWatchlistItemRepository repo)
         {
-            _readRepo = readRepo;
-            _mapper = mapper;
+            _repo = repo;
         }
 
         public async Task<IEnumerable<WatchlistItemModel>> Handle(GetWatchlistQuery request, CancellationToken cancellationToken)
         {
-            var modelList = await _readRepo.GetByUserId(request.UserId);
+            var modelList = await _repo.GetByUserId(request.UserId);
 
             if (!modelList.Any())
                 throw new NotFoundException($"User doesn't have a watchlist!");

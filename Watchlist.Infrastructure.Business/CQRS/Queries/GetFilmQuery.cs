@@ -15,14 +15,14 @@ namespace Watchlist.Infrastructure.Business.CQRS.Queries
 
     public class GetFilmQueryHandler : IRequestHandler<GetFilmQuery, IEnumerable<ShortFilmModel>>
     {
-        private readonly IFilmSearchService _filmSearchService;
+        private readonly IFilmSearchService _searchService;
         public GetFilmQueryHandler(IFilmSearchService filmSearchService)
         {
-            _filmSearchService = filmSearchService;
+            _searchService = filmSearchService;
         }
         public async Task<IEnumerable<ShortFilmModel>> Handle(GetFilmQuery request, CancellationToken cancellationToken)
         {
-            var result = await _filmSearchService.GetFilmListByTitleAsync(request.Title);
+            var result = await _searchService.GetFilmListByTitleAsync(request.Title);
 
             if (!result.Any())
                 throw new Exception("no content");

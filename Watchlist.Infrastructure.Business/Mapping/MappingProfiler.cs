@@ -12,6 +12,8 @@ namespace Watchlist.Infrastructure.Business.Mapping
             CreateMap<ShortFilmDto, ShortFilmModel>();
             CreateMap<FullFilmModel, WatchlistItemModel>()
                 .AfterMap((src, dest) => dest.IsWatched = false).ReverseMap();
+            CreateMap<PosterDto, PosterModel>();
+            CreateMap<WikiDto, WikiModel>();
         }
     }
 }

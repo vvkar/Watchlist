@@ -1,8 +1,7 @@
 ﻿using MediatR;
 using Watchlist.Domain.Core.Exceptions;
 using Watchlist.Domain.Core.Models;
-using Watchlist.Domain.Interfaces.Repositories.Read;
-using Watchlist.Domain.Interfaces.Repositories.Write;
+using Watchlist.Domain.Interfaces.Repositories;
 
 namespace Watchlist.Infrastructure.Business.CQRS.Commands
 {
@@ -20,26 +19,22 @@ namespace Watchlist.Infrastructure.Business.CQRS.Commands
     public class ChangeFilmStatusCommandHandler
         : IRequestHandler<ChangeFilmStatusCommand, WatchlistItemModel>
     {
-        private readonly IWatchlistItemReadRepository _readRepo;
-        private readonly IWatchlistItemWriteRepository _writeRepo;
-        public ChangeFilmStatusCommandHandler(
-            IWatchlistItemReadRepository readRepo,
-            IWatchlistItemWriteRepository writeRepo)
+        private readonly IWatchlistItemRepository _repo;
+        public ChangeFilmStatusCommandHandler(IWatchlistItemRepository repo)
         {
-            _readRepo = readRepo;
-            _writeRepo = writeRepo;
+            _repo = repo;
         }
 
         public async Task<WatchlistItemModel> Handle(ChangeFilmStatusCommand request, CancellationToken cancellationToken)
         {
-            var model = await _readRepo.GetAsync(request.UserId, request.FilmId);
+            var model = await _repo.GetAsync(request.UserId, request.FilmId);
 
             if (model is null)
                 throw new NotFoundException($"User doesn't have in watchlist film with id: {request.FilmId}");
 
             model.IsWatched = !model.IsWatched;
 
-            var updatedModel = await _writeRepo.UpdateFullAsync(model);
+            var updatedModel = await _repo.UpdateFullAsync(model);
 
             return updatedModel;
         }

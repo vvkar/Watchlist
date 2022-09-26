@@ -2,10 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using Watchlist.Domain.Interfaces.Repositories.Read;
-using Watchlist.Domain.Interfaces.Repositories.Write;
-using Watchlist.Infrastructure.Persistance.Repositories.Read;
-using Watchlist.Infrastructure.Persistance.Repositories.Write;
+using Watchlist.Domain.Interfaces.Repositories;
+using Watchlist.Infrastructure.Persistance.Repositories;
 
 namespace Watchlist.Infrastructure.Persistance
 {
@@ -21,8 +19,7 @@ namespace Watchlist.Infrastructure.Persistance
 
         public static void AddRepositories(this IServiceCollection services)
         {
-            services.AddScoped<IWatchlistItemReadRepository, WatchlistItemReadRepository>();
-            services.AddScoped<IWatchlistItemWriteRepository, WatchlistItemWriteRepository>();
+            services.AddScoped<IWatchlistItemRepository, WatchlistItemRepository>();
         }
     }
 }

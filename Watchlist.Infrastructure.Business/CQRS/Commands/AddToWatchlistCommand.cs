@@ -2,8 +2,7 @@
 using MediatR;
 using Watchlist.Domain.Core.Exceptions;
 using Watchlist.Domain.Core.Models;
-using Watchlist.Domain.Interfaces.Repositories.Read;
-using Watchlist.Domain.Interfaces.Repositories.Write;
+using Watchlist.Domain.Interfaces.Repositories;
 using Watchlist.Domain.Interfaces.Services;
 
 namespace Watchlist.Infrastructure.Business.CQRS.Commands
@@ -21,26 +20,22 @@ namespace Watchlist.Infrastructure.Business.CQRS.Commands
 
     public class AddToWatchlistCommandHandler : IRequestHandler<AddToWatchlistCommand, WatchlistItemModel>
     {
-        private readonly IWatchlistItemReadRepository _readRepo;
-        private readonly IWatchlistItemWriteRepository _writeRepo;
+        private readonly IWatchlistItemRepository _repo;
         private readonly IFilmSearchService _searchService;
         private readonly IMapper _mapper;
 
-        public AddToWatchlistCommandHandler(
-            IWatchlistItemReadRepository readRepo,
-            IWatchlistItemWriteRepository writeRepo,
-            IFilmSearchService searchService,
-            IMapper mapper)
+        public AddToWatchlistCommandHandler(IWatchlistItemRepository repo,
+                                            IFilmSearchService searchService,
+                                            IMapper mapper)
         {
-            _readRepo = readRepo;
-            _writeRepo = writeRepo;
+            _repo = repo;
             _searchService = searchService;
             _mapper = mapper;
         }
 
         public async Task<WatchlistItemModel> Handle(AddToWatchlistCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _readRepo.GetAsync(request.UserId, request.FilmId);
+            var entity = await _repo.GetAsync(request.UserId, request.FilmId);
 
             if (entity is not null)
                 throw new AlreadyAddedException($"Film with id {request.FilmId} already added to watchlist!");
@@ -51,7 +46,7 @@ namespace Watchlist.Infrastructure.Business.CQRS.Commands
 
             model.UserId = request.UserId;
 
-            return await _writeRepo.CreateAsync(model);
+            return await _repo.CreateAsync(model);
         }
     }
 }

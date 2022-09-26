@@ -17,13 +17,33 @@ namespace Watchlist.Infrastructure.Business.Services
         private readonly HttpClient _client;
         private readonly FilmSearchServiceOptions _options;
 
-        public ImdbSearchService(IMapper mapper, HttpClient client, IOptionsSnapshot<FilmSearchServiceOptions> namedOptions)
+        public ImdbSearchService(IMapper mapper, 
+                                 HttpClient client, 
+                                 IOptionsSnapshot<FilmSearchServiceOptions> namedOptions)
         {
             _mapper = mapper;
             _client = client;
             _options = namedOptions.Get(FilmSearchServiceOptions.IMDB);
             _client.BaseAddress = new Uri(_options.BaseUri);
+        }
 
+        //TODO: consider another name
+        public async Task<FilmEmailModel> GetFilmEmailModelByIdAsync(string filmId)
+        {
+            var filmTask = GetFilmByIdAsync(filmId);
+            var posterTask = GetPosterByIdAsync(filmId);
+            var wikiTask = GetWikiByIdAsync(filmId);
+
+            await Task.WhenAll(filmTask, posterTask, wikiTask);
+
+            var model = new FilmEmailModel()
+            {
+                Film = filmTask.Result,
+                Poster = posterTask.Result,
+                Wiki = wikiTask.Result,
+            };
+
+            return model;
         }
 
         public async Task<FullFilmModel> GetFilmByIdAsync(string filmId)
@@ -33,6 +53,28 @@ namespace Watchlist.Infrastructure.Business.Services
             var result = await CheckAndDeserialize<FullFilmResponseDto>(response);
 
             var model = _mapper.Map<FullFilmModel>(result);
+
+            return model;
+        }
+
+        public async Task<PosterModel> GetPosterByIdAsync(string filmId)
+        {
+            var response = await _client.GetAsync($"Posters/{_options.ApiKey}/{filmId}");
+
+            var result = await CheckAndDeserialize<PostersResponseDto>(response);
+
+            var model = _mapper.Map<PosterModel>(result.Posters.FirstOrDefault());
+
+            return model;
+        }
+
+        public async Task<WikiModel> GetWikiByIdAsync(string filmId)
+        {
+            var response = await _client.GetAsync($"Wikipedia/{_options.ApiKey}/{filmId}");
+
+            var result = await CheckAndDeserialize<WikiResponseDto>(response);
+
+            var model = _mapper.Map<WikiModel>(result.Result);
 
             return model;
         }
