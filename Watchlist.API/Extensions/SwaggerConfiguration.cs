@@ -1,7 +1,7 @@
 ﻿using Microsoft.OpenApi.Models;
 using System.Reflection;
 
-namespace Watchlist.API.Configurations
+namespace Watchlist.API.Extensions
 {
     public static class SwaggerConfiguration
     {

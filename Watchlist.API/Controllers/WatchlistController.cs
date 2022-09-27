@@ -27,7 +27,7 @@ namespace Watchlist.API.Controllers
         /// <response code="200">Film added successfully</response>
         /// <response code="400">Invalid request data</response>
         [HttpPost]
-        [Route("")]
+        [Route("film")]
         [ProducesResponseType(typeof(SuccessResponse<WatchlistItemResponse>), StatusCodes.Status200OK)]
         [ProducesErrorResponseType(typeof(ErrorResponse<>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -75,15 +75,15 @@ namespace Watchlist.API.Controllers
         /// <response code="200">Film status successfully changed</response>
         /// <response code="400">Invalid request data</response>
         /// <response code="404">User doesn't have this film in a watchlist</response>
-        [HttpPost]
-        [Route("change-status")]
+        [HttpPatch]
+        [Route("film")]
         [ProducesResponseType(typeof(SuccessResponse<IEnumerable<WatchlistItemResponse>>), StatusCodes.Status200OK)]
         [ProducesErrorResponseType(typeof(ErrorResponse<>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> ChangeFilmStatus([FromBody] ChangeFilmStatusRequest request)
         {
-            var command = new ChangeFilmStatusCommand(request.UserId, request.FilmId);
+            var command = new ChangeFilmStatusCommand(request.UserId, request.FilmId, request.IsWatched);
 
             var result = await _mediator.Send(command);
 

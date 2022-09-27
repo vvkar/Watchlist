@@ -11,9 +11,9 @@ namespace Watchlist.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SearchController : BaseController
+    public class FilmsController : BaseController
     {
-        public SearchController(IMapper mapper, IMediator mediator) 
+        public FilmsController(IMapper mapper, IMediator mediator) 
             : base(mapper, mediator)
         {
         }

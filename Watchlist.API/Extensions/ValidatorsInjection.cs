@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using System.Reflection;
-using Watchlist.API.Validation.Validators;
 
 namespace Watchlist.API.Extensions
 {

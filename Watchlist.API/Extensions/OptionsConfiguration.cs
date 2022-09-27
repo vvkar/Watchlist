@@ -1,6 +1,6 @@
 ﻿using Watchlist.Domain.Core.Options;
 
-namespace Watchlist.API.Configurations
+namespace Watchlist.API.Extensions
 {
     public static class OptionsConfiguration
     {

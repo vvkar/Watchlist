@@ -23,8 +23,4 @@
     <ProjectReference Include="..\Watchlist.Domain.Interfaces\Watchlist.Domain.Interfaces.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="CQRS\" />
-  </ItemGroup>
-
 </Project>

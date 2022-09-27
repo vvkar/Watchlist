@@ -1,5 +1,4 @@
 using FluentValidation.AspNetCore;
-using Watchlist.API.Configurations;
 using Watchlist.API.Extensions;
 using Watchlist.API.Filters;
 using Watchlist.Infrastructure.Business.Extensions;

@@ -34,6 +34,7 @@ namespace Watchlist.Infrastructure.Business.Commands.Watchlist.AddToWatchlist
             var model = _mapper.Map<WatchlistItemModel>(film);
             model.UserId = request.UserId;
             model.IsWatched = false;
+            //TODO: consider setting adding date as promotion date
 
             return await _repo.CreateAsync(model);
         }

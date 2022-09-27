@@ -10,6 +10,7 @@ namespace Watchlist.API.Validation.Validators
         {
             RuleFor(x => x.UserId).UserId();
             RuleFor(x => x.FilmId).FilmId();
+            RuleFor(x => x.IsWatched).NotNull();
         }
     }
 }

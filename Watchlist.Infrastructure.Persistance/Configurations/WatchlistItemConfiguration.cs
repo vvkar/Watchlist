@@ -13,8 +13,6 @@ namespace Watchlist.Infrastructure.Persistance.Configurations
             builder.Property(f => f.IsWatched)
                 .IsRequired()
                 .HasDefaultValue(false);
-
-            builder.Property(f => f.Title).HasMaxLength(50);
         }
     }
 }

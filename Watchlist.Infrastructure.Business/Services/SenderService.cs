@@ -10,7 +10,7 @@ namespace Watchlist.Infrastructure.Business.Services
     public class SenderService : ISenderService
     {
         private readonly SmtpOptions _options;
-        public SenderService(IOptions<SmtpOptions> options)
+        public SenderService(IOptionsSnapshot<SmtpOptions> options)
         {
             _options = options.Value;
         }
@@ -25,7 +25,7 @@ namespace Watchlist.Infrastructure.Business.Services
 
             await client.SendMailAsync(message);
         }
-
+        //TODO: user email may be discovered from Auth service
         public MailMessage CreateFilmPromotionMessage(FilmEmailModel filmModel, string? userEmail = null)
         {
             var body = HtmlGenerator.GenerateFilmPromotionMessage(filmModel);

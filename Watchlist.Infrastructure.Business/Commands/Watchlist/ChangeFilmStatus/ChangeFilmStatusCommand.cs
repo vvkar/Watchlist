@@ -1,7 +1,5 @@
 ﻿using MediatR;
-using Watchlist.Domain.Core.Exceptions;
 using Watchlist.Domain.Core.Models;
-using Watchlist.Domain.Interfaces.Repositories;
 
 namespace Watchlist.Infrastructure.Business.Commands.Watchlist.ChangeFilmStatus
 {
@@ -9,10 +7,12 @@ namespace Watchlist.Infrastructure.Business.Commands.Watchlist.ChangeFilmStatus
     {
         public Guid UserId { get; init; }
         public string FilmId { get; init; }
-        public ChangeFilmStatusCommand(Guid userId, string filmId)
+        public bool IsWatched { get; init; }
+        public ChangeFilmStatusCommand(Guid userId, string filmId, bool isWatched)
         {
             UserId = userId;
             FilmId = filmId;
+            IsWatched = isWatched;
         }
     }
 }

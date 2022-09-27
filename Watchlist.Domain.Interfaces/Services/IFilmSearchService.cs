@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using Watchlist.Domain.Core.Models;
+﻿using Watchlist.Domain.Core.Models;
 
 namespace Watchlist.Domain.Interfaces.Services
 {

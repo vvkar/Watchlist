@@ -16,8 +16,7 @@ namespace Watchlist.Infrastructure.Business.Jobs
         public PromotionJob(IWatchlistItemRepository repo,
                             IFilmSearchService searchService,
                             ISenderService senderService,
-                            //UNDONE: or ioptions snapshot?
-                            IOptions<PromotionOptions> options)
+                            IOptionsSnapshot<PromotionOptions> options)
         {
             _repo = repo;
             _searchService = searchService;
@@ -27,7 +26,14 @@ namespace Watchlist.Infrastructure.Business.Jobs
 
         public async Task Execute(IJobExecutionContext context)
         {
-            await CheckWatchlistAndPromote();
+            try
+            {
+                await CheckWatchlistAndPromote();
+            }
+            catch (Exception ex)
+            {
+                //TODO: add logging
+            }
         }
 
         public async Task CheckWatchlistAndPromote()
@@ -37,9 +43,9 @@ namespace Watchlist.Infrastructure.Business.Jobs
             if (unwatchedList.Count() < _options.MinimumFilmsLimit)
                 return;
 
-            foreach(var film in unwatchedList)
+            foreach (var film in unwatchedList)
             {
-                if(CheckPromotionAbility(film))
+                if (CheckPromotionAbility(film))
                 {
                     var promotionTask = PromoteFilm(film);
                     var updateTask = UpdateFilmPromotionDate(film);
@@ -61,7 +67,7 @@ namespace Watchlist.Infrastructure.Business.Jobs
         private bool CheckPromotionAbility(WatchlistItemModel film)
         {
             return film.PromotionDate is null 
-                || (DateTime.Now.Subtract((DateTime)film.PromotionDate).TotalDays) >= _options.MinimumDaysAfterPromotion;
+                || (DateTime.UtcNow.Subtract((DateTime)film.PromotionDate).TotalDays) >= _options.MinimumDaysAfterPromotion;
         }
 
         private async Task PromoteFilm(WatchlistItemModel film, string? userEmail = null)
@@ -73,7 +79,7 @@ namespace Watchlist.Infrastructure.Business.Jobs
 
         private async Task UpdateFilmPromotionDate(WatchlistItemModel film)
         {
-            film.PromotionDate = DateTime.Now;
+            film.PromotionDate = DateTime.UtcNow;
             await _repo.UpdateFullAsync(film);
         }
     }

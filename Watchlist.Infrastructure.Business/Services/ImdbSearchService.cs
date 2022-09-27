@@ -8,6 +8,7 @@ using Watchlist.Domain.Core.Options;
 using Watchlist.Domain.Interfaces.Services;
 using Watchlist.Infrastructure.Business.DTO;
 using Watchlist.Infrastructure.Business.DTO.Base;
+using Watchlist.Infrastructure.Business.Extensions;
 
 namespace Watchlist.Infrastructure.Business.Services
 {
@@ -53,7 +54,7 @@ namespace Watchlist.Infrastructure.Business.Services
 
         public async Task<FullFilmModel> GetFilmByIdAsync(string filmId)
         {
-            var response = await _client.GetAsync(GetRequestUrl(Title, filmId));
+            var response = await _client.GetAsync(method: Title, _options.ApiKey, filmId);
 
             var result = await CheckAndDeserialize<FullFilmResponseDto>(response);
 
@@ -64,7 +65,7 @@ namespace Watchlist.Infrastructure.Business.Services
 
         public async Task<PosterModel> GetPosterByIdAsync(string filmId)
         {
-            var response = await _client.GetAsync(GetRequestUrl(Posters, filmId));
+            var response = await _client.GetAsync(method: Posters, _options.ApiKey, filmId);
 
             var result = await CheckAndDeserialize<PostersResponseDto>(response);
 
@@ -75,7 +76,7 @@ namespace Watchlist.Infrastructure.Business.Services
 
         public async Task<WikiModel> GetWikiByIdAsync(string filmId)
         {
-            var response = await _client.GetAsync(GetRequestUrl(Wikipedia, filmId));
+            var response = await _client.GetAsync(method: Wikipedia, _options.ApiKey, filmId);
 
             var result = await CheckAndDeserialize<WikiResponseDto>(response);
 
@@ -86,7 +87,7 @@ namespace Watchlist.Infrastructure.Business.Services
 
         public async Task<IEnumerable<ShortFilmModel>> GetFilmListByTitleAsync(string title)
         {
-            var response = await _client.GetAsync(GetRequestUrl(Search, title));
+            var response = await _client.GetAsync(method: Search, _options.ApiKey, title);
 
             var result = await CheckAndDeserialize<FilmListResponseDto>(response);
 
@@ -107,10 +108,6 @@ namespace Watchlist.Infrastructure.Business.Services
                 throw new BadRequestException(result.ErrorMessage);
 
             return result;
-        }
-        private string GetRequestUrl(string method, string request)
-        {
-            return $"{method}/{_options.ApiKey}/{request}";
         }
     }
 }

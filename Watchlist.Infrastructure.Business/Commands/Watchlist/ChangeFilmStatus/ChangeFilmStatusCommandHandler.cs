@@ -21,7 +21,7 @@ namespace Watchlist.Infrastructure.Business.Commands.Watchlist.ChangeFilmStatus
             if (model is null)
                 throw new NotFoundException($"User doesn't have in watchlist film with id: {request.FilmId}");
 
-            model.IsWatched = !model.IsWatched;
+            model.IsWatched = request.IsWatched;
 
             var updatedModel = await _repo.UpdateFullAsync(model);
 

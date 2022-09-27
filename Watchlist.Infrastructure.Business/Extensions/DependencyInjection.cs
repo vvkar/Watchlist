@@ -18,6 +18,7 @@ namespace Watchlist.Infrastructure.Business.Extensions
             services.AddScoped<IFilmSearchService, ImdbSearchService>();
             services.AddScoped<ISenderService, SenderService>();
 
+            //TODO: consider configuring base adress
             services.AddHttpClient<IFilmSearchService, ImdbSearchService>();
 
             services.AddQuartz(q =>
@@ -33,10 +34,10 @@ namespace Watchlist.Infrastructure.Business.Extensions
                     .ForJob(promotionJobKey)
                     .WithIdentity($"{nameof(PromotionJob)}-trigger")
                 .WithSchedule(CronScheduleBuilder
-                    .WeeklyOnDayAndHourAndMinute(options.DayOfWeek, options.Hour, options.Hour)
+                    .WeeklyOnDayAndHourAndMinute(options.DayOfWeek, options.Hour, options.Minute)
                     .InTimeZone(TimeZoneInfo.Local)));
                 //.WithSimpleSchedule(x => x
-                //    .WithIntervalInSeconds(600)
+                //    .WithIntervalInSeconds(20)
                 //    .RepeatForever()));
             });
             services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
