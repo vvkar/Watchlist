@@ -1,4 +1,4 @@
-﻿namespace Neobank.Test.API.Models.Pesponses
+﻿namespace Watchlist.API.Models.Pesponses
 {
     public class WatchlistItemResponse
     {

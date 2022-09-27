@@ -1,4 +1,4 @@
-﻿namespace Neobank.Test.API.Models.Requests
+﻿namespace Watchlist.API.Models.Requests
 {
     public class ChangeFilmStatusRequest
     {

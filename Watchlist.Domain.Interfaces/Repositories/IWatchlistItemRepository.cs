@@ -1,4 +1,5 @@
-﻿using Watchlist.Domain.Core.Models;
+﻿using System.Linq.Expressions;
+using Watchlist.Domain.Core.Models;
 
 namespace Watchlist.Domain.Interfaces.Repositories
 {
@@ -10,5 +11,6 @@ namespace Watchlist.Domain.Interfaces.Repositories
         Task<IEnumerable<Guid>> GetUsersAsync();
         Task<WatchlistItemModel> CreateAsync(WatchlistItemModel model);
         Task<WatchlistItemModel> UpdateFullAsync(WatchlistItemModel model);
+        Task<IEnumerable<WatchlistItemModel>> GetUnwatchedListByUserId(Guid userId);
     }
 }

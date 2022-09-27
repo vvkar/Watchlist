@@ -1,7 +1,8 @@
 ﻿using FluentValidation;
-using Neobank.Test.API.Models.Requests;
+using Watchlist.API.Models.Requests;
+using Watchlist.API.Validation.Validators.Common;
 
-namespace Neobank.Test.API.Validation.Validators
+namespace Watchlist.API.Validation.Validators
 {
     public class ChangeFilmStatusRequestValidator : AbstractValidator<ChangeFilmStatusRequest>
     {

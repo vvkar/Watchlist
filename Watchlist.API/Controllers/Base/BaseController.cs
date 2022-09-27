@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Neobank.Test.API.Controllers.Base
+namespace Watchlist.API.Controllers.Base
 {
     [Route("api/[controller]")]
     [ApiController]

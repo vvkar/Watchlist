@@ -16,6 +16,11 @@ namespace Watchlist.Infrastructure.Business.Services
         private readonly IMapper _mapper;
         private readonly HttpClient _client;
         private readonly FilmSearchServiceOptions _options;
+        private const string Title = "Title";
+        private const string Posters = "Posters";
+        private const string Wikipedia = "Wikipedia";
+        private const string Search = "Search";
+
 
         public ImdbSearchService(IMapper mapper, 
                                  HttpClient client, 
@@ -48,7 +53,7 @@ namespace Watchlist.Infrastructure.Business.Services
 
         public async Task<FullFilmModel> GetFilmByIdAsync(string filmId)
         {
-            var response = await _client.GetAsync($"Title/{_options.ApiKey}/{filmId}");
+            var response = await _client.GetAsync(GetRequestUrl(Title, filmId));
 
             var result = await CheckAndDeserialize<FullFilmResponseDto>(response);
 
@@ -59,7 +64,7 @@ namespace Watchlist.Infrastructure.Business.Services
 
         public async Task<PosterModel> GetPosterByIdAsync(string filmId)
         {
-            var response = await _client.GetAsync($"Posters/{_options.ApiKey}/{filmId}");
+            var response = await _client.GetAsync(GetRequestUrl(Posters, filmId));
 
             var result = await CheckAndDeserialize<PostersResponseDto>(response);
 
@@ -70,7 +75,7 @@ namespace Watchlist.Infrastructure.Business.Services
 
         public async Task<WikiModel> GetWikiByIdAsync(string filmId)
         {
-            var response = await _client.GetAsync($"Wikipedia/{_options.ApiKey}/{filmId}");
+            var response = await _client.GetAsync(GetRequestUrl(Wikipedia, filmId));
 
             var result = await CheckAndDeserialize<WikiResponseDto>(response);
 
@@ -81,7 +86,7 @@ namespace Watchlist.Infrastructure.Business.Services
 
         public async Task<IEnumerable<ShortFilmModel>> GetFilmListByTitleAsync(string title)
         {
-            var response = await _client.GetAsync($"Search/{_options.ApiKey}/{title}");
+            var response = await _client.GetAsync(GetRequestUrl(Search, title));
 
             var result = await CheckAndDeserialize<FilmListResponseDto>(response);
 
@@ -102,6 +107,10 @@ namespace Watchlist.Infrastructure.Business.Services
                 throw new BadRequestException(result.ErrorMessage);
 
             return result;
+        }
+        private string GetRequestUrl(string method, string request)
+        {
+            return $"{method}/{_options.ApiKey}/{request}";
         }
     }
 }

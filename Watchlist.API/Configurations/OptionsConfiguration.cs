@@ -1,6 +1,6 @@
 ﻿using Watchlist.Domain.Core.Options;
 
-namespace Neobank.Test.API.Configurations
+namespace Watchlist.API.Configurations
 {
     public static class OptionsConfiguration
     {

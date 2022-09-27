@@ -1,7 +1,7 @@
 ﻿using System.Net.Mail;
 using Watchlist.Domain.Core.Models;
 
-namespace Watchlist.Infrastructure.Business.Services
+namespace Watchlist.Domain.Interfaces.Services
 {
     public interface ISenderService
     {

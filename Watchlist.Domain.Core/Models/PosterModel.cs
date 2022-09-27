@@ -8,7 +8,6 @@ namespace Watchlist.Domain.Core.Models
 {
     public class PosterModel
     {
-        //TODO: consider adding FilmId
         public string Uri { get; set; }
     }
 }

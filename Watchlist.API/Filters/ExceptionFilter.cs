@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Neobank.Test.API.Models.Pesponses.Base;
+using Watchlist.API.Models.Pesponses.Base;
 using Watchlist.Domain.Core.Exceptions;
 
-namespace Neobank.Test.API.Filters
+namespace Watchlist.API.Filters
 {
     public class ExceptionFilter : IExceptionFilter
     {
@@ -23,9 +23,9 @@ namespace Neobank.Test.API.Filters
             if (context.Exception is BadRequestException || context.Exception is AlreadyAddedException)
                 context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
 
-            else if(context.Exception is NotFoundException)
+            else if (context.Exception is NotFoundException)
                 context.HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
-            
+
             else context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
         }
     }

@@ -7,7 +7,7 @@ using Watchlist.Domain.Interfaces.Services;
 using Watchlist.Infrastructure.Business.Jobs;
 using Watchlist.Infrastructure.Business.Services;
 
-namespace Watchlist.Infrastructure.Business
+namespace Watchlist.Infrastructure.Business.Extensions
 {
     public static class DependencyInjection
     {
@@ -17,7 +17,7 @@ namespace Watchlist.Infrastructure.Business
 
             services.AddScoped<IFilmSearchService, ImdbSearchService>();
             services.AddScoped<ISenderService, SenderService>();
-            
+
             services.AddHttpClient<IFilmSearchService, ImdbSearchService>();
 
             services.AddQuartz(q =>
@@ -35,7 +35,6 @@ namespace Watchlist.Infrastructure.Business
                 .WithSchedule(CronScheduleBuilder
                     .WeeklyOnDayAndHourAndMinute(options.DayOfWeek, options.Hour, options.Hour)
                     .InTimeZone(TimeZoneInfo.Local)));
-                //.WithCronSchedule("0 30 19 ? * SUN *")
                 //.WithSimpleSchedule(x => x
                 //    .WithIntervalInSeconds(600)
                 //    .RepeatForever()));

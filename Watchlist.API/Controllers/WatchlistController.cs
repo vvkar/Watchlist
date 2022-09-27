@@ -1,46 +1,22 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Neobank.Test.API.Controllers.Base;
-using Neobank.Test.API.Models.Pesponses;
-using Neobank.Test.API.Models.Pesponses.Base;
-using Neobank.Test.API.Models.Requests;
-using Watchlist.Infrastructure.Business.CQRS.Commands;
-using Watchlist.Infrastructure.Business.CQRS.Queries;
+using Watchlist.API.Controllers.Base;
+using Watchlist.API.Models.Pesponses;
+using Watchlist.API.Models.Pesponses.Base;
+using Watchlist.API.Models.Requests;
+using Watchlist.Infrastructure.Business.Commands.Watchlist.AddToWatchlist;
+using Watchlist.Infrastructure.Business.Commands.Watchlist.ChangeFilmStatus;
+using Watchlist.Infrastructure.Business.Queries.Watchlist.GetWatchlist;
 
-namespace Neobank.Test.API.Controllers
+namespace Watchlist.API.Controllers
 {
     [ApiController]
-    public class FilmsController : BaseController
+    public class WatchlistController : BaseController
     {
-        public FilmsController(IMapper mapper, IMediator mediator)
+        public WatchlistController(IMapper mapper, IMediator mediator)
             : base(mapper, mediator)
         {
-        }
-
-        /// <summary>
-        /// Searches films by provided title
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        /// <response code="200">Search completed successfully</response>
-        /// <response code="400">Invalid request data</response>
-        /// <response code="404">No data found</response>
-        [HttpGet]
-        [Route("{Title}")]
-        [ProducesResponseType(typeof(SuccessResponse<IEnumerable<ShortFilmResponse>>), StatusCodes.Status200OK)]
-        [ProducesErrorResponseType(typeof(ErrorResponse<>))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetFilms([FromRoute]GetFilmsRequest request)
-        {
-            var query = new GetFilmQuery(request.Title);
-
-            var result = await _mediator.Send(query);
-
-            var response = _mapper.Map<IEnumerable<ShortFilmResponse>>(result);
-
-            return Ok(response);
         }
 
         /// <summary>
@@ -51,6 +27,7 @@ namespace Neobank.Test.API.Controllers
         /// <response code="200">Film added successfully</response>
         /// <response code="400">Invalid request data</response>
         [HttpPost]
+        [Route("")]
         [ProducesResponseType(typeof(SuccessResponse<WatchlistItemResponse>), StatusCodes.Status200OK)]
         [ProducesErrorResponseType(typeof(ErrorResponse<>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -74,7 +51,7 @@ namespace Neobank.Test.API.Controllers
         /// <response code="400">Invalid request data</response>
         /// <response code="404">User doesn't have a watchlist</response>
         [HttpGet]
-        [Route("watchlist/{UserId}")]
+        [Route("{UserId}")]
         [ProducesResponseType(typeof(SuccessResponse<IEnumerable<WatchlistItemResponse>>), StatusCodes.Status200OK)]
         [ProducesErrorResponseType(typeof(ErrorResponse<>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -89,7 +66,7 @@ namespace Neobank.Test.API.Controllers
 
             return Ok(response);
         }
-        
+
         /// <summary>
         /// Switches film status in User's watchlist
         /// </summary>

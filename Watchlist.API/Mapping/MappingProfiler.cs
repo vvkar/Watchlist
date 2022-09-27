@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Neobank.Test.API.Models.Pesponses;
+using Watchlist.API.Models.Pesponses;
 using Watchlist.Domain.Core.Models;
 
-namespace Neobank.Test.API.Mapping
+namespace Watchlist.API.Mapping
 {
     public class MappingProfiler : Profile
     {

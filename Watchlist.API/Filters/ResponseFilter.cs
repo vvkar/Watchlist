@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Neobank.Test.API.Models.Pesponses.Base;
+using Watchlist.API.Models.Pesponses.Base;
 
-namespace Neobank.Test.API.Filters
+namespace Watchlist.API.Filters
 {
     public class ResponseFilter : IActionFilter
     {
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            if(context.Result is OkObjectResult result)
+            if (context.Result is OkObjectResult result)
                 context.Result = new OkObjectResult(new SuccessResponse<object>()
                 {
                     Body = result.Value

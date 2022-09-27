@@ -1,4 +1,4 @@
-﻿namespace Neobank.Test.API.Models.Pesponses.Base
+﻿namespace Watchlist.API.Models.Pesponses.Base
 {
     public abstract record BaseResponse<T>
     {

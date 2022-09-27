@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using Watchlist.Domain.Core.Models;
 using Watchlist.Domain.Interfaces.Repositories;
 using Watchlist.Infrastructure.Persistance.Entities;
@@ -73,5 +74,16 @@ namespace Watchlist.Infrastructure.Persistance.Repositories
 
             return model;
         }
+
+        //TODO: consider expression predicate
+        public async Task<IEnumerable<WatchlistItemModel>> GetUnwatchedListByUserId(Guid userId)
+        {
+            var entityList = await _context.WatchlistItems.AsNoTracking()
+                .Where(x => x.UserId == userId).OrderByDescending(x => x.ImDbRating).ToListAsync();
+
+            var modelList = _mapper.Map<IEnumerable<WatchlistItemModel>>(entityList);
+            return modelList;
+        }
+       
     }
 }

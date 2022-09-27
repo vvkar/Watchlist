@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using System.Text.RegularExpressions;
 
-namespace Neobank.Test.API.Validation.Validators
+namespace Watchlist.API.Validation.Validators.Common
 {
     public static class CommonValidationRules
     {

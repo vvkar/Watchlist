@@ -5,19 +5,8 @@ using Watchlist.Domain.Core.Models;
 using Watchlist.Domain.Interfaces.Repositories;
 using Watchlist.Domain.Interfaces.Services;
 
-namespace Watchlist.Infrastructure.Business.CQRS.Commands
+namespace Watchlist.Infrastructure.Business.Commands.Watchlist.AddToWatchlist
 {
-    public record AddToWatchlistCommand : IRequest<WatchlistItemModel>
-    {
-        public Guid UserId { get; init; }
-        public string FilmId { get; init; }
-        public AddToWatchlistCommand(Guid userId, string filmId)
-        {
-            UserId = userId;
-            FilmId = filmId;
-        }
-    }
-
     public class AddToWatchlistCommandHandler : IRequestHandler<AddToWatchlistCommand, WatchlistItemModel>
     {
         private readonly IWatchlistItemRepository _repo;
@@ -43,8 +32,8 @@ namespace Watchlist.Infrastructure.Business.CQRS.Commands
             var film = await _searchService.GetFilmByIdAsync(request.FilmId);
 
             var model = _mapper.Map<WatchlistItemModel>(film);
-
             model.UserId = request.UserId;
+            model.IsWatched = false;
 
             return await _repo.CreateAsync(model);
         }

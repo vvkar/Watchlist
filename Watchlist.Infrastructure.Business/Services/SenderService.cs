@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Mail;
 using Watchlist.Domain.Core.Models;
 using Watchlist.Domain.Core.Options;
+using Watchlist.Domain.Interfaces.Services;
 
 namespace Watchlist.Infrastructure.Business.Services
 {
@@ -23,9 +24,6 @@ namespace Watchlist.Infrastructure.Business.Services
             };
 
             await client.SendMailAsync(message);
-
-            //UNDONE: do i need dispose?
-            client.Dispose();
         }
 
         public MailMessage CreateFilmPromotionMessage(FilmEmailModel filmModel, string? userEmail = null)

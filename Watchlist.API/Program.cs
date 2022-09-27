@@ -1,9 +1,9 @@
 using FluentValidation.AspNetCore;
-using Neobank.Test.API.Configurations;
-using Neobank.Test.API.DI;
-using Neobank.Test.API.Filters;
-using Watchlist.Infrastructure.Business;
-using Watchlist.Infrastructure.Persistance;
+using Watchlist.API.Configurations;
+using Watchlist.API.Extensions;
+using Watchlist.API.Filters;
+using Watchlist.Infrastructure.Business.Extensions;
+using Watchlist.Infrastructure.Persistance.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

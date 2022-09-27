@@ -1,7 +1,7 @@
 ﻿using Microsoft.OpenApi.Models;
 using System.Reflection;
 
-namespace Neobank.Test.API.Configurations
+namespace Watchlist.API.Configurations
 {
     public static class SwaggerConfiguration
     {
@@ -20,7 +20,7 @@ namespace Neobank.Test.API.Configurations
                     }
                 });
                 var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                setup.IncludeXmlComments(Path.Combine(System.AppContext.BaseDirectory, xmlFilename)); ;
+                setup.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename)); ;
             });
         }
     }

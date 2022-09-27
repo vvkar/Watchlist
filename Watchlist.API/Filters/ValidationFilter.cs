@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Neobank.Test.API.Models.Pesponses;
-using Neobank.Test.API.Models.Pesponses.Base;
+using Watchlist.API.Models.Pesponses;
+using Watchlist.API.Models.Pesponses.Base;
 
-namespace Neobank.Test.API.Filters
+namespace Watchlist.API.Filters
 {
     public class ValidationFilter : IActionFilter
     {

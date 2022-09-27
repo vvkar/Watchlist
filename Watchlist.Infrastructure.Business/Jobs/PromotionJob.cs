@@ -4,7 +4,6 @@ using Watchlist.Domain.Core.Models;
 using Watchlist.Domain.Core.Options;
 using Watchlist.Domain.Interfaces.Repositories;
 using Watchlist.Domain.Interfaces.Services;
-using Watchlist.Infrastructure.Business.Services;
 
 namespace Watchlist.Infrastructure.Business.Jobs
 {
@@ -17,6 +16,7 @@ namespace Watchlist.Infrastructure.Business.Jobs
         public PromotionJob(IWatchlistItemRepository repo,
                             IFilmSearchService searchService,
                             ISenderService senderService,
+                            //UNDONE: or ioptions snapshot?
                             IOptions<PromotionOptions> options)
         {
             _repo = repo;
@@ -53,9 +53,7 @@ namespace Watchlist.Infrastructure.Business.Jobs
         {
             var userIdList = await _repo.GetUsersAsync();
 
-            var usersWatchlist = await _repo.GetAllAsync();
-
-            var unwatchedList = usersWatchlist.Where(x => x.IsWatched == false).OrderByDescending(x => x.ImDbRating).ToList();
+            var unwatchedList = await _repo.GetUnwatchedListByUserId(userIdList.FirstOrDefault());
             
             return unwatchedList;
         }

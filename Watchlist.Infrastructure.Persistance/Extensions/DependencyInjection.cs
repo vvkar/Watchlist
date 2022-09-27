@@ -5,7 +5,7 @@ using System.Reflection;
 using Watchlist.Domain.Interfaces.Repositories;
 using Watchlist.Infrastructure.Persistance.Repositories;
 
-namespace Watchlist.Infrastructure.Persistance
+namespace Watchlist.Infrastructure.Persistance.Extensions
 {
     public static class DependencyInjection
     {

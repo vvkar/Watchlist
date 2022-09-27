@@ -3,17 +3,8 @@ using Watchlist.Domain.Core.Exceptions;
 using Watchlist.Domain.Core.Models;
 using Watchlist.Domain.Interfaces.Repositories;
 
-namespace Watchlist.Infrastructure.Business.CQRS.Queries
+namespace Watchlist.Infrastructure.Business.Queries.Watchlist.GetWatchlist
 {
-    public record GetWatchlistQuery : IRequest<IEnumerable<WatchlistItemModel>>
-    {
-        public Guid UserId { get; init; }
-        public GetWatchlistQuery(Guid userId)
-        {
-            UserId = userId;
-        }
-    }
-
     public class GetWatchlistQueryHandler
         : IRequestHandler<GetWatchlistQuery, IEnumerable<WatchlistItemModel>>
     {
