@@ -36,9 +36,6 @@ namespace Watchlist.Infrastructure.Business.Extensions
                 .WithSchedule(CronScheduleBuilder
                     .WeeklyOnDayAndHourAndMinute(options.DayOfWeek, options.Hour, options.Minute)
                     .InTimeZone(TimeZoneInfo.Local)));
-                //.WithSimpleSchedule(x => x
-                //    .WithIntervalInSeconds(20)
-                //    .RepeatForever()));
             });
             services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
         }

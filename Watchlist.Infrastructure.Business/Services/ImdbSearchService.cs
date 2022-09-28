@@ -33,7 +33,6 @@ namespace Watchlist.Infrastructure.Business.Services
             _client.BaseAddress = new Uri(_options.BaseUri);
         }
 
-        //TODO: consider another name
         public async Task<FilmEmailModel> GetFilmEmailModelByIdAsync(string filmId)
         {
             var filmTask = GetFilmByIdAsync(filmId);

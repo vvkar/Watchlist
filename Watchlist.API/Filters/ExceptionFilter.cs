@@ -14,7 +14,7 @@ namespace Watchlist.API.Filters
         }
         public void OnException(ExceptionContext context)
         {
-            //TODO: Consider use environment to fill 500 error
+            //TODO: Consider use environment to cover 500 error
             context.Result = new ObjectResult(new ErrorResponse<object>()
             {
                 Message = context.Exception.Message,
